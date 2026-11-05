@@ -449,6 +449,7 @@ scheduler(void)
         // to release its lock and then reacquire it
         // before jumping back to us.
         p->state = RUNNING;
+        printk("process [%s:%d] is running\n", p->name, p->pid);
         c->proc = p;
         swtch(&c->context, &p->context);
 
