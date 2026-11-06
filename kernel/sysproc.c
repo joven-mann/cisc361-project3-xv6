@@ -114,7 +114,6 @@ sys_uptime(void)
 uint64
 sys_crsp(void) // initialized system call function sys_crsp
 {
-  crsp(); // the function will call crsp()
-  return 0; // returns 0 to match the function decleration 
-
+  crsp();   // the function will call crsp()
+  return 0; // returns 0 to match the function decleration
 }

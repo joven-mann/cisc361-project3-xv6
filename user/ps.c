@@ -5,6 +5,6 @@
 int
 main(void)
 {
-    crsp();
-    exit(0);
+  crsp();
+  exit(0);
 }
