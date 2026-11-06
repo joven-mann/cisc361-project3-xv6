@@ -702,3 +702,33 @@ procdump(void)
     printk("\n");
   }
 }
+
+// The system call function crsp() loops through each
+// process and does the following
+// - acquires a lock for the process
+// - checks if the process is running or sleeping
+// - prints the name, pid, and state of the process is it is running or sleeping
+// - releases the lock for the process
+void
+crsp(void)
+{
+  struct proc *p; // p will be used to loop through each process in proc
+
+  printk("name\tpid\tstate\n"); // prints the labels name, pid, and state
+  printk("---------------------------\n"); // prints the divisor line between the labels and actual procceses
+
+  for (p = proc; p < &proc[NPROC]; p++) { // loops through each process in proc
+    
+    acquire(&p->lock); // Acquire the process lock
+    
+    if(p->state == RUNNING) { // checks if the process is running
+      printk("%s\t%d\tRUNNING\n", p->name, p->pid); // prints the name and pid of the running process
+
+    }else if (p->state == SLEEPING){ // if the process is not running, it checks if it is sleeping
+      printk("%s\t%d\tSLEEPING\n", p->name, p->pid); // prints the name and pid of the sleeping process
+    }
+
+    release(&p->lock); //release the process lock
+  }
+    
+}
